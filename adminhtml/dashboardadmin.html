@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glamping Admin Dashboard</title>
+
+  <link rel="stylesheet" href="../admincss/admin.css">
+</head>
+<body>
+
+<div class="dashboard-container active" id="bookingPage">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+     <div class="sidebar-header">
+      <div class="profile-picture-container" id="profilePictureContainer">
+        <div class="profile-picture" id="profilePicture"></div>
+
+        <div class="profile-picture-overlay">
+          Click to<br>Update Photo
+        </div>
+        <input
+          type="file"
+          id="profilePictureInput"
+          accept="image/*"
+          style="display:none;">
+      </div>
+
+      <h2 id="companyNameSidebar">UPSI Glamping</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item active"><a href="dashboardadmin.html">📊 Dashboard</a></div>
+      <div class="nav-item"><a href="customeradmin.html">👥 Customers</a></div>
+      <div class="nav-item"><a href="bookingadmin.html">📅 Bookings</a></div>
+      <div class="nav-item"><a href="extraactivitiesadmin.html">🎯 Extra Activities</a></div>
+      <div class="nav-item"><a href="packageadmin.html">📦 Packages</a></div>
+      <div class="nav-item"><a href="settingadmin.html">⚙️ Account Settings</a></div>
+    </nav>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="page-content active">
+      <div class="content-header">
+        <h1>Welcome to Admin Dashboard</h1>
+      </div>
+
+      <div class="stats-grid">
+  <div class="stat-card">
+    <h3>Total Customers</h3>
+    <p class="stat-value" id="totalCustomers">0</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Total Bookings</h3>
+    <p class="stat-value" id="totalBookings">0</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Active Activities</h3>
+    <p class="stat-value" id="totalActivities">0</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Available Packages</h3>
+    <p class="stat-value" id="totalPackages">0</p>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      // Buang session / token (jika ada)
+      localStorage.removeItem("admin_logged_in");
+
+      // Redirect ke login page
+      window.location.href = "loginadmin.html";
+    });
+  }
+});
+</script>
+
+
+<script>
+/* ===============================
+   PROFILE PICTURE UPLOAD
+   (TAMBAHAN SAHAJA – SAMA MACAM EXTRA ACTIVITIES)
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("profilePictureContainer");
+  const fileInput = document.getElementById("profilePictureInput");
+  const profilePic = document.getElementById("profilePicture");
+
+  if (!container || !fileInput || !profilePic) return;
+
+  // Klik gambar → buka file chooser
+  container.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  // Pilih gambar → preview + simpan
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePic.style.backgroundImage = `url(${reader.result})`;
+      localStorage.setItem("adminProfilePic", reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Load gambar bila refresh / page lain
+  const savedPic = localStorage.getItem("adminProfilePic");
+  if (savedPic) {
+    profilePic.style.backgroundImage = `url(${savedPic})`;
+  }
+});
+</script>
+
+<!-- ================= JS ================= -->
+<script src="../adminjavascript/dashboardadmin.js"></script>
+
+
+
+
+</body>
+</html>

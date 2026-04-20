@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glamping Admin Dashboard</title>
+
+  <link rel="stylesheet" href="../admincss/admin.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard-container active" id="bookingPage">
+
+  <!-- SIDEBAR (ASAL) -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="profile-picture-container" id="profilePictureContainer">
+        <div class="profile-picture" id="profilePicture"></div>
+        <div class="profile-picture-overlay">
+          Click to<br>Update Photo
+        </div>
+        <input type="file" id="profilePictureInput" accept="image/*" style="display:none;">
+      </div>
+
+      <h2 id="companyNameSidebar">UPSI Glamping</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item"><a href="dashboardadmin.html">📊 Dashboard</a></div>
+      <div class="nav-item"><a href="customeradmin.html">👥 Customers</a></div>
+      <div class="nav-item"><a href="bookingadmin.html">📅 Bookings</a></div>
+      <div class="nav-item"><a href="extraactivitiesadmin.html">🎯 Extra Activities</a></div>
+      <div class="nav-item active"><a href="packageadmin.html">📦 Packages</a></div>
+      <div class="nav-item"><a href="settingadmin.html">⚙️ Account Settings</a></div>
+    </nav>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="content-header">
+      <h1>Package Management</h1>
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h2>All Packages</h2>
+        <button class="add-btn" id="addPackageBtn">+ Add Package</button>
+      </div>
+
+      <div class="table-scroll">
+
+        <div id="packagesTableContainer" class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="image-col">Image</th>
+              <th class="image-col">Image 2</th>
+              <th class="image-col">Image 3</th>
+              <th class="package-name">Package Name</th>
+              <th class="facility-col">Facility</th>
+              <th>Capacity</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th class="action-col">Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="packagesTableBody">
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="empty-state" id="emptyPackageState">
+        <div class="empty-state-icon">📦</div>
+        <p>No packages yet</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= ADD / EDIT PACKAGE MODAL ================= -->
+<div class="modal-overlay" id="packageModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>Add Package</h2>
+      <button class="modal-close" id="closePackageModal">&times;</button>
+    </div>
+
+<form id="packageForm" enctype="multipart/form-data">
+
+  <input type="hidden" name="action" id="action">
+  <input type="hidden" name="id_package" id="id_package">
+
+  <input type="hidden" name="old_image_package">
+  <input type="hidden" name="old_image_package1">
+  <input type="hidden" name="old_image_package2">
+
+  <div class="form-group">
+    <label>Package Name</label>
+    <input type="text" name="name_package" required>
+  </div>
+
+  <div class="form-group">
+    <label>Facility</label>
+    <textarea name="facility"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Capacity</label>
+    <input type="text" name="capacity">
+  </div>
+
+  <div class="form-group">
+    <label>Availability</label>
+    <input type="text" name="quantity">
+  </div>
+
+  <div class="form-group">
+    <label>Image 1</label>
+    <input type="file" name="image_package">
+  </div>
+
+  <div class="form-group">
+    <label>Image 2</label>
+    <input type="file" name="image_package1">
+  </div>
+
+  <div class="form-group">
+    <label>Image 3</label>
+    <input type="file" name="image_package2">
+  </div>
+
+  <hr>
+  <h3>Package Price</h3>
+
+  <div class="form-group">
+    <label>UPSI – Weekday (RM)</label>
+    <input type="number" step="0.01" 
+           name="price_upsi_weekday"
+           id="price_upsi_weekday"
+           required>
+  </div>
+
+  <div class="form-group">
+    <label>UPSI – Weekend (RM)</label>
+    <input type="number" step="0.01" 
+           name="price_upsi_weekend"
+           id="price_upsi_weekend"
+           required>
+  </div>
+
+  <div class="form-group">
+    <label>Public – Weekday (RM)</label>
+    <input type="number" step="0.01" 
+           name="price_public_weekday"
+           id="price_public_weekday"
+           required>
+  </div>
+
+  <div class="form-group">
+    <label>Public – Weekend (RM)</label>
+    <input type="number" step="0.01" 
+           name="price_public_weekend"
+           id="price_public_weekend"
+           required>
+  </div>
+
+  <div class="modal-actions">
+    <button type="button" id="cancelPackage">Cancel</button>
+    <button type="submit" class="btn-save">Save Changes</button>
+  </div>
+
+</form>
+
+  </div>
+</div>
+
+<script src="../adminjavascript/packageadmin.js"></script>
+</body>
+</html>

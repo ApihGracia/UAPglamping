@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — UPSI Glamping</title>
+  
+  <!-- path from html/ to css/ -->
+  <link rel="stylesheet" href="../css/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- VIDEO BACKGROUND (WAJIB ADA) -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="../imej/bookingVid.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+  
+  <!-- logo dan home icon -->
+ <div class="floating-bar">
+  <div class="brand-left">
+    <img src="../imej/logo1.png" alt="UAP Glamping Logo">
+    <div class="brand-text">
+      <div class="brand-title">UPSI</div>
+      <div class="brand-sub">GLAMPING PARK</div>
+    </div>
+  </div>
+  <a href="../html/index.php" class="home-float" title="Back to Home">
+    <img src="../imej/home.png" alt="Home">
+  </a>
+</div> 
+
+  <div class="wrap">
+    <main class="card" role="main">
+      <div class="grid">
+        <section class="form-section">
+          <form id="loginForm" autocomplete="off" novalidate>
+            <h1>Log In</h1>
+            <p class="hint">Enter your email and password to access your account.</p>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+			  <div class="error-text" id="emailError"></div>
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" placeholder="Your password" required>
+              <div class="error-text" id="passwordError"></div>
+			</div>
+
+           <div class="field">
+             <label class="category-title">User Category</label>
+           </div>
+
+		  <div class="field category-group">
+            <label class="checkbox">
+             <input type="radio" id="upsi" name="userType" value="upsi">
+             <span>UPSI Citizen</span>
+            </label>
+
+            <label class="checkbox">
+             <input type="radio" id="public" name="userType" value="public">
+             <span>Government / Agencies / Public</span>
+            </label>
+          </div>
+
+            <div class="action-row">
+              <button type="submit" class="btn btn-primary">Log In</button>
+              <button type="button" id="clearBtn" class="btn btn-ghost">Clear</button>
+            </div>
+
+            <!-- Forgot password link -->
+            <p class="form-link">
+              <a href="forgot.html" style="color: var(--khaki);" >Forgot password?</a>
+            </p>
+
+            <p class="form-link">
+              Don’t have an account?
+              <a href="signup1.html" style="color: var(--khaki);" >Sign up</a>
+            </p>
+
+            <div class="success-msg" id="successMsg" role="status" aria-live="polite">Login successful — redirecting...</div>
+            <div class="error-msg" id="errorMsg" role="alert" aria-live="assertive"></div>
+
+          </form>
+        </section>
+
+        <aside class="side-help" aria-label="Help information">
+
+         <div class="upsi-note">
+            <h4>UPSI Citizen?</h4>
+            <p>
+             UPSI students and staff may log in directly using their official UPSI
+             account. No registration is required.
+            </p>
+         </div>
+
+         <h3>Need help to log in?</h3>
+         <ul>
+           <li>Check that your email is the one you used to sign up.</li>
+           <li>If you forgot your password, use <strong>Forgot password?</strong>.</li>
+           <li>For account help, contact UPSI Glamping support 019-4944306 (En Iskandar).</li>
+         </ul>
+
+        </aside>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../javascript/login.js"></script>
+</body>
+</html>

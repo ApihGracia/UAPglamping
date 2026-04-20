@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up — UPSI Glamping</title>
+
+  <link rel="stylesheet" href="../css/signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ===== POPUP MODAL (SUCCESS ONLY) ===== -->
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box">
+    <p id="popupMessage"></p>
+    <button id="popupBtn">OK</button>
+  </div>
+</div>
+
+<!-- ===== VIDEO BACKGROUND ===== -->
+<div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="../imej/bookingVid.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+<!-- ===== FLOATING LOGO ===== -->
+<div class="floating-bar">
+  <div class="brand-left">
+    <img src="../imej/logo1.png" alt="UPSI Glamping Logo">
+    <div class="brand-text">
+      <div class="brand-title">UPSI</div>
+      <div class="brand-sub">GLAMPING PARK</div>
+    </div>
+  </div>
+  <a href="../html/index.php" class="home-float">
+    <img src="../imej/home.png" alt="Home">
+  </a>
+</div>
+
+<div class="wrap">
+  <main class="card">
+    <div class="grid">
+
+      <!-- ===== FORM ===== -->
+      <section>
+        <form id="signupForm" method="POST" novalidate>
+
+          <h1>Create an Account</h1>
+          <p class="hint">
+            Fill in the details below to create a customer account for booking the glamping park.
+          </p>
+
+          <!-- EMAIL -->
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email_customer" type="email" placeholder="you@example.com">
+            <div class="error-text" id="emailError"></div>
+          </div>
+
+          <!-- FULL NAME -->
+          <div class="field">
+            <label for="fullname">Full name</label>
+            <input id="fullname" name="name" type="text" placeholder="e.g. Ahmad bin Ali">
+            <div class="error-text" id="nameError"></div>
+          </div>
+
+          <!-- GENDER -->
+         <div class="field">
+  <label>Gender</label>
+
+  <!-- ERROR GENDER (DI BAWAH LABEL) -->
+  <div class="error-text" id="genderError"></div>
+
+  <!-- RADIO OPTIONS -->
+  <div class="gender-group">
+    <label class="gender-option">
+      <input type="radio" name="gender" value="Male"> Male
+    </label>
+
+    <label class="gender-option">
+      <input type="radio" name="gender" value="Female"> Female
+    </label>
+  </div>
+</div>
+
+
+          <!-- PHONE -->
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="mobile" type="tel" placeholder="e.g. 012-345 6789">
+            <div class="error-text" id="phoneError"></div>
+          </div>
+
+          <!-- ADDRESS -->
+          <div class="field">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" placeholder="Full address"></textarea>
+            <div class="error-text" id="addressError"></div>
+		  </div>
+
+          <!-- PASSWORD -->
+          <div class="field row">
+            <div class="col">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" placeholder="Minimum 8 characters">
+              <div class="error-text" id="passwordError"></div>
+            </div>
+
+            <div class="col">
+              <label for="confirm_password">Confirm password</label>
+              <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm password">
+              <div class="error-text" id="confirmError"></div>
+            </div>
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="action-row">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="button" id="clearBtn" class="btn btn-ghost">Clear</button>
+          </div>
+
+          <p class="small-note" style="text-align:center;margin-top:12px;">
+            Already have an account?
+           <a href="login.html" class="login-link ">Log in here</a>
+          </p>
+
+        </form>
+      </section>
+
+      <!-- ===== SIDE INFO ===== -->
+	  <aside class="side-panel">
+
+  <div class="upsi-note">
+    <h4>UPSI Citizen?</h4>
+    <p>
+      UPSI students and staff may log in directly using their official
+      UPSI account. No registration is required.
+    </p>
+  </div>
+
+  <div class="side-help">
+    <h3>Registration Guide</h3>
+    <ul>
+      <li>Use a valid email.</li>
+      <li>Password minimum 8 characters.</li>
+      <li>After signup, log in to book.</li>
+    </ul>
+  </div>
+
+</aside>
+
+
+    </div>
+  </main>
+</div>
+
+<script src="../javascript/signup.js"></script>
+</body>
+</html>

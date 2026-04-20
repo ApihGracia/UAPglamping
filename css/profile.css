@@ -1,0 +1,226 @@
+.profile-page { 
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* CENTER CONTENT */
+.profile-container {
+  max-width: 900px;
+  margin: 90px auto 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 0 20px;
+}
+
+/* CARD SAME AS BOOKING */
+.profile-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  text-align: center;
+  margin-top: -60px;
+  padding-top: 36px;
+}
+
+/* =========================
+   FORM FIELD
+   ========================= */
+.field {
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.field input[readonly],
+.field textarea[readonly] {
+  border: none;
+  padding-left: 0;
+  font-weight: 600;
+  background: transparent;
+}
+
+/* =========================
+   ACTION BUTTONS (FIXED)
+   ========================= */
+.actions {
+  display: flex;
+  justify-content: center;   /* ⬅️ CENTER */
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* PRIMARY BUTTON — EDIT / SAVE */
+.btn-edit {
+  background: var(--khaki-dark);
+  color: var(--black);
+  padding:10px 16px; 
+  border-radius:6px; 
+  border:none; 
+  cursor:pointer; 
+  font-weight:600;
+}
+
+.btn-edit:hover {
+  background: var(--black); 
+  color:var(--white); 
+  opacity:0.95; 
+}
+
+/* SECONDARY BUTTON — CANCEL / BACK */
+.btn-ghost {
+  background:transparent; 
+  color:var(--black); 
+  padding:8px 12px; 
+  border-radius:6px; 
+  border:3px solid #ddd; 
+  cursor:pointer; 
+}
+
+.btn-ghost:hover {
+  opacity:0.95; 
+  background: var(--black);
+  color: var(--white)
+}
+
+/* =========================
+   MESSAGE
+   ========================= */
+.message.success {
+  color: green;
+  margin-top: 12px;
+}
+
+.message.error {
+  color: #b00020;
+  margin-top: 12px;
+}
+
+.profile-hero {
+  height: 420px;              
+  margin-top: -110px;         
+  display: flex;
+  align-items: center;        
+  justify-content: center;
+
+  background-image: url('../imej/KhemahKecil_2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+
+/* =========================
+   PROFILE HEADER
+   ========================= */
+.profile-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.profile-avatar {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--khaki-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar i {
+  font-size: 34px;
+  color: var(--black);
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 6px 0 2px;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: #777;
+}
+
+/* =========================
+   FORM GRID LAYOUT
+   ========================= */
+.profile-card form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+
+/* FULL WIDTH FIELD */
+.field textarea,
+.field select {
+  grid-column: span 2;
+}
+
+/* ACTIONS FULL WIDTH */
+.actions,
+.message {
+  grid-column: span 2;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+  .profile-card form {
+    grid-template-columns: 1fr;
+  }
+
+  .field textarea,
+  .field select,
+  .actions,
+  .message {
+    grid-column: span 1;
+  }
+}
+
+/* CENTER FORM CONTENT */
+.profile-card form {
+  max-width: 720px;      /* kawal lebar content */
+  margin: 0 auto;       /* center */
+}
+
+/* =========================
+   EDIT MODE VISUAL
+   ========================= */
+.profile-card.editing .profile-avatar {
+  background: #e5e5e5;
+}
+
+.profile-card.editing .profile-avatar i {
+  color: #999;
+}
+
+.profile-card.editing .profile-name,
+.profile-card.editing .profile-email {
+  color: #999;
+}
+
+.profile-card.editing {
+  border-color: #ddd;
+}

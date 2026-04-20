@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glamping Admin – Customers</title>
+
+  <link rel="stylesheet" href="../admincss/admin.css">
+</head>
+<body>
+
+<div class="dashboard-container active" id="bookingPage">
+
+  <!-- ================= SIDEBAR ================= -->
+  <div class="sidebar">
+     <div class="sidebar-header">
+      <div class="profile-picture-container" id="profilePictureContainer">
+        <div class="profile-picture" id="profilePicture"></div>
+
+        <div class="profile-picture-overlay">
+          Click to<br>Update Photo
+        </div>
+        <input
+          type="file"
+          id="profilePictureInput"
+          accept="image/*"
+          style="display:none;">
+      </div>
+
+      <h2 id="companyNameSidebar">UPSI Glamping</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item" data-page="dashboard">
+        <a href="dashboardadmin.html">📊 Dashboard</a>
+      </div>
+
+      <div class="nav-item active" data-page="customers">
+        <a href="customeradmin.html">👥 Customers</a>
+      </div>
+
+      <div class="nav-item" data-page="bookings">
+        <a href="bookingadmin.html">📅 Bookings</a>
+      </div>
+
+      <div class="nav-item" data-page="activities">
+        <a href="extraactivitiesadmin.html">🎯 Extra Activities</a>
+      </div>
+
+      <div class="nav-item" data-page="packages">
+        <a href="packageadmin.html">📦 Packages</a>
+      </div>
+
+      <div class="nav-item" data-page="settings">
+        <a href="settingadmin.html">⚙️ Account Settings</a>
+      </div>
+    </nav>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <div class="main-content">
+    <div class="page-content active" id="customersContent">
+
+      <div class="content-header">
+        <h1>Customer Management</h1>
+      </div>
+
+      <div class="table-container">
+
+        <!-- HEADER -->
+        <div class="customer-header">
+          <h2>All Customers</h2>
+
+          <div class="action-buttons">
+            <button
+              id="exportPdfBtn"
+              class="btn-export-green"
+              type="button"
+            >
+              Export PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="customer-filters">
+          <label>Filter by Month:</label>
+
+          <input
+            type="month"
+            id="fromMonth"
+            class="month-picker"
+          >
+
+          <span>to</span>
+
+          <input
+            type="month"
+            id="toMonth"
+            class="month-picker"
+          >
+
+          <button
+            id="applyFilterBtn"
+            class="btn-filter"
+            type="button"
+          >
+            Apply
+          </button>
+
+          <button
+            id="resetFilterBtn"
+            class="btn-reset"
+            type="button"
+          >
+            Reset
+          </button>
+        </div>
+
+        <!-- TABLE / EMPTY STATE -->
+        <div id="customersTableContainer">
+          <div class="empty-state">
+            <div class="empty-state-icon">👥</div>
+            <p class="empty-state-text">No customers yet</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= LOGOUT ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (!logoutBtn) return;
+
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("admin_logged_in");
+    window.location.href = "loginadmin.html";
+  });
+});
+</script>
+
+<!-- ================= PROFILE PICTURE ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("profilePictureContainer");
+  const fileInput = document.getElementById("profilePictureInput");
+  const profilePic = document.getElementById("profilePicture");
+
+  if (!container || !fileInput || !profilePic) return;
+
+  container.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePic.style.backgroundImage = `url(${reader.result})`;
+      localStorage.setItem("adminProfilePic", reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  const savedPic = localStorage.getItem("adminProfilePic");
+  if (savedPic) {
+    profilePic.style.backgroundImage = `url(${savedPic})`;
+  }
+});
+</script>
+
+<!-- ================= PDF LIBRARY (WAJIB DULU) ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="../adminjavascript/customeradmin.js"></script>
+
+
+</body>
+</html>

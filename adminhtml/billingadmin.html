@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glamping Admin Dashboard</title>
+
+ 
+<link rel="stylesheet" href="../admincss/admin.css">
+</head>
+<body>
+	
+	<div class="dashboard-container active" id="dashboardPage">
+  <!-- Sidebar -->
+   <div class="sidebar">
+    <div class="sidebar-header">
+     <div class="profile-picture-container" id="profilePictureContainer">
+      <div class="profile-picture" id="profilePicture"></div>
+	  
+	  <div class="profile-picture-overlay">
+       Click to<br>
+       Update Photo
+      </div><input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+     </div>
+     <h2 id="companyNameSidebar">UPSI Glamping</h2>
+     <p>Admin Panel</p>
+	 
+    </div>
+    <nav class="nav-menu">
+     <div class="nav-item " data-page="dashboard">
+      <a href="dashboardadmin.html">📊 Dashboard </a>
+     </div>
+	 
+     <div class="nav-item" data-page="customers">
+	 <a href="customeradmin.html">👥 Customers </a>
+     </div>
+	 
+     <div class="nav-item" data-page="bookings">
+	 <a href="bookingadmin.html">📅 Bookings </a>
+     </div>
+	 
+     <div class="nav-item active" data-page="billing">
+      <a href="billingadmin.html">💳 Billing </a>
+     </div>
+	 
+     <div class="nav-item" data-page="activities">
+      <a href="extraactivitiesadmin.html">🎯 Extra Activities </a>
+     </div>
+	 
+     <div class="nav-item" data-page="packages">
+      <a href="packageadmin.html">📦 Packages </a>
+     </div>
+	 
+     <div class="nav-item" data-page="settings">
+	 <a href="settingadmin.html">⚙️ Account Settings </a>
+      
+     </div>
+    </nav><button class="logout-btn" id="logoutBtn">Logout</button>
+   </div>
+   
+	
+ <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+
+  <!-- PAGE HEADER -->
+  <div class="content-header">
+    <h1>Billing Management</h1>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="table-container">
+
+    <!-- HEADER SAMA MACAM CUSTOMER & BOOKING -->
+ <div class="customer-header">
+  <div>
+    <h2>All Receipts</h2>
+
+    <!-- 🔽 FILTER BULAN (TAMBAHAN) -->
+    <div class="customer-filters" style="margin-top:8px;">
+      <label style="font-size:13px;color:#555;">
+        Filter by Month:
+      </label>
+
+      <input
+        type="month"
+        id="fromBillingMonth"
+        class="month-picker"
+      >
+
+      <span style="font-size:13px;color:#666;">to</span>
+
+      <input
+        type="month"
+        id="toBillingMonth"
+        class="month-picker"
+      >
+
+      <button id="applyBillingFilterBtn" class="btn-filter">
+        Apply
+      </button>
+
+      <button id="resetBillingFilterBtn" class="btn-reset">
+        Reset
+      </button>
+    </div>
+    <!-- 🔼 TAMBAH SAMPAI SINI SAHAJA -->
+  </div>
+
+  <div class="action-buttons">
+    <button id="exportBillingPdfBtn" class="btn-export-green">
+      Export PDF
+    </button>
+  </div>
+</div>
+
+
+    <!-- EMPTY STATE -->
+    <div id="billingTableContainer">
+      <div class="empty-state">
+        <div class="empty-state-icon">💳</div>
+        <p class="empty-state-text">No receipts yet</p>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+    </div>
+	
+	
+	<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      // Buang session / token (jika ada)
+      localStorage.removeItem("admin_logged_in");
+
+      // Redirect ke login page
+      window.location.href = "loginadmin.html";
+    });
+  }
+});
+</script>
+
+	
+	
+	
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+  const savedLogo = localStorage.getItem('login_logo');
+
+  if (savedLogo) {
+    const profilePic = document.getElementById('profilePicture');
+    if (profilePic) {
+      profilePic.style.backgroundImage = `url(${savedLogo})`;
+      profilePic.style.backgroundSize = 'cover';
+      profilePic.style.backgroundPosition = 'center';
+    }
+  }
+});
+
+	</script>
+  
+  
+  <script>
+/* ===============================
+   PROFILE PICTURE UPLOAD
+   (TAMBAHAN SAHAJA – SAMA MACAM EXTRA ACTIVITIES)
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("profilePictureContainer");
+  const fileInput = document.getElementById("profilePictureInput");
+  const profilePic = document.getElementById("profilePicture");
+
+  if (!container || !fileInput || !profilePic) return;
+
+  // Klik gambar → buka file chooser
+  container.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  // Pilih gambar → preview + simpan
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePic.style.backgroundImage = `url(${reader.result})`;
+      localStorage.setItem("adminProfilePic", reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Load gambar bila refresh / page lain
+  const savedPic = localStorage.getItem("adminProfilePic");
+  if (savedPic) {
+    profilePic.style.backgroundImage = `url(${savedPic})`;
+  }
+});
+</script>
+
+
+	<script src="/_sdk/data_sdk.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="../adminjavascript/billingadmin.js"></script>
+
+
+
+  
+	</body>
+	</html>
+	
+	

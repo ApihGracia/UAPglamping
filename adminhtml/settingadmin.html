@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Settings</title>
+  <link rel="stylesheet" href="../admincss/admin.css">
+</head>
+<body>
+
+<div class="dashboard-container active" id="bookingPage">
+
+  <!-- SIDEBAR (ASAL) -->
+  <div class="sidebar">
+     <div class="sidebar-header">
+      <div class="profile-picture-container" id="profilePictureContainer">
+        <div class="profile-picture" id="profilePicture"></div>
+
+        <div class="profile-picture-overlay">
+          Click to<br>Update Photo
+        </div>
+        <input
+          type="file"
+          id="profilePictureInput"
+          accept="image/*"
+          style="display:none;">
+      </div>
+
+      <h2 id="companyNameSidebar">UPSI Glamping</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item"><a href="dashboardadmin.html">📊 Dashboard</a></div>
+      <div class="nav-item"><a href="customeradmin.html">👥 Customers</a></div>
+      <div class="nav-item"><a href="bookingadmin.html">📅 Bookings</a></div>
+      <div class="nav-item"><a href="extraactivitiesadmin.html">🎯 Extra Activities</a></div>
+      <div class="nav-item"><a href="packageadmin.html">📦 Packages</a></div>
+      <div class="nav-item active"><a href="settingadmin.html">⚙️ Account Settings</a></div>
+    </nav>
+
+    <button class="logout-btn" id="logoutBtn">
+      Logout
+    </button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <div class="content-header">
+      <h1>Admin Settings</h1>
+    </div>
+
+    <div class="table-container" style="max-width:500px;">
+
+      <h2>Reset Password</h2>
+
+      <form id="resetPasswordForm">
+
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" id="newPassword" required>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input type="password" id="confirmPassword" required>
+        </div>
+
+        <button type="submit" class="btn-save">
+          Update Password
+        </button>
+
+        <p id="resetMsg" style="margin-top:10px;"></p>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+	<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      // Buang session / token (jika ada)
+      localStorage.removeItem("admin_logged_in");
+
+      // Redirect ke login page
+      window.location.href = "loginadmin.html";
+    });
+  }
+});
+</script>
+
+	
+	
+	
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+  const savedLogo = localStorage.getItem('login_logo');
+
+  if (savedLogo) {
+    const profilePic = document.getElementById('profilePicture');
+    if (profilePic) {
+      profilePic.style.backgroundImage = `url(${savedLogo})`;
+      profilePic.style.backgroundSize = 'cover';
+      profilePic.style.backgroundPosition = 'center';
+    }
+  }
+});
+
+	</script>
+  
+  
+  <script>
+/* ===============================
+   PROFILE PICTURE UPLOAD
+   (TAMBAHAN SAHAJA – SAMA MACAM EXTRA ACTIVITIES)
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("profilePictureContainer");
+  const fileInput = document.getElementById("profilePictureInput");
+  const profilePic = document.getElementById("profilePicture");
+
+  if (!container || !fileInput || !profilePic) return;
+
+  // Klik gambar → buka file chooser
+  container.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  // Pilih gambar → preview + simpan
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePic.style.backgroundImage = `url(${reader.result})`;
+      localStorage.setItem("adminProfilePic", reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Load gambar bila refresh / page lain
+  const savedPic = localStorage.getItem("adminProfilePic");
+  if (savedPic) {
+    profilePic.style.backgroundImage = `url(${savedPic})`;
+  }
+});
+</script>
+
+<script src="../adminjavascript/settingadmin.js"></script>
+</body>
+</html>

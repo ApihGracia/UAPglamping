@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glamping Admin Dashboard</title>
+  <link rel="stylesheet" href="../admincss/admin.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard-container active" id="bookingPage">
+
+  <!-- SIDEBAR (ASAL) -->
+  <div class="sidebar">
+     <div class="sidebar-header">
+      <div class="profile-picture-container" id="profilePictureContainer">
+        <div class="profile-picture" id="profilePicture"></div>
+
+        <div class="profile-picture-overlay">
+          Click to<br>Update Photo
+        </div>
+        <input
+          type="file"
+          id="profilePictureInput"
+          accept="image/*"
+          style="display:none;">
+      </div>
+
+      <h2 id="companyNameSidebar">UPSI Glamping</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item"><a href="dashboardadmin.html">📊 Dashboard</a></div>
+      <div class="nav-item"><a href="customeradmin.html">👥 Customers</a></div>
+      <div class="nav-item"><a href="bookingadmin.html">📅 Bookings</a></div>
+      <div class="nav-item active"><a href="extraactivitiesadmin.html">🎯 Extra Activities</a></div>
+      <div class="nav-item"><a href="packageadmin.html">📦 Packages</a></div>
+      <div class="nav-item"><a href="settingadmin.html">⚙️ Account Settings</a></div>
+    </nav>
+
+    <button class="logout-btn" id="logoutBtn">
+      Logout
+    </button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <div class="content-header">
+      <h1>Activities Management</h1>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="table-container">
+      <div class="table-header booking-header">
+
+        <!-- FILTER -->
+        <div class="customer-filters">
+          <label for="fromBookingMonth">Filter by Month:</label>
+
+          <input
+            type="month"
+            id="fromBookingMonth"
+            class="month-picker">
+
+          <label for="toBookingMonth" class="sr-only">To Month</label>
+          <input
+            type="month"
+            id="toBookingMonth"
+            class="month-picker"
+          >
+
+          <button
+            id="applyBookingFilterBtn"
+            class="btn-filter"
+            type="button"
+          >
+            Apply
+          </button>
+
+          <button
+            id="resetBookingFilterBtn"
+            class="btn-reset"
+            type="button"
+          >
+            Reset
+          </button>
+        </div>
+
+        <div class="booking-header-right">
+          <button class="add-btn" id="addBookingBtn">+ Book Activity</button>
+          <button class="export-btn" id="exportBookingPDF">Export PDF</button>
+        </div>
+
+      </div>
+
+      <div id="bookingTableContainer"></div>
+    </div>
+
+    <!-- ACTIVITIES -->
+    <div class="table-container">
+      <div class="table-header">
+        <h2>Extra Activities</h2>
+        <button class="add-btn" id="addActivityBtn">+ Add Activity</button>
+      </div>
+      <div id="activitiesTableContainer"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ADD / EDIT ACTIVITY MODAL -->
+<div class="modal" id="activityModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Add Activity</h2>
+      <button class="close-btn" id="closeActivityModal">×</button>
+    </div>
+
+    <form id="activityForm">
+      <input type="hidden" name="id_activity" id="id_activity">
+
+      <div class="form-field">
+        <label>Activity Name</label>
+        <input type="text" name="name_activity" required>
+      </div>
+
+      <div class="form-field">
+        <label>Price (RM)</label>
+        <input type="number" name="price_activity" step="0.01" required>
+      </div>
+
+      <div class="form-field">
+        <label>Image 1</label>
+        <input type="file" name="image1" placeholder="image/*">
+      </div>
+
+      <div class="form-field">
+        <label>Image 2</label>
+        <input type="file" name="image2" placeholder="image/*">
+      </div>
+
+      <div class="form-field">
+        <label>Image 3</label>
+        <input type="file" name="image3" placeholder="image/*">
+      </div>
+
+      <div class="form-field">
+        <label>Description</label>
+        <textarea name="detail_activity"></textarea>
+      </div>
+
+<input type="hidden" name="old_image1">
+<input type="hidden" name="old_image2">
+<input type="hidden" name="old_image3">
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" id="cancelActivity">Cancel</button>
+        <button type="submit" class="save-btn">Save Activity</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- BOOK ACTIVITY MODAL -->
+<div class="modal" id="bookActivityModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Book Activity</h2>
+      <button class="close-btn" id="closeBookActivityModal">×</button>
+    </div>
+
+    <form id="bookActivityForm">
+      <input type="hidden" name="id_bookingActivity" id="id_bookingActivity">
+
+      <div class="form-field">
+        <label>Customer Name</label>
+        <input type="text" name="customer_name" required>
+      </div>
+
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" name="customer_email" required>
+      </div>
+
+      <div class="form-field">
+        <label>Phone Number</label>
+        <input type="text" name="customer_phone" pattern="[0-9]{9,11}" required>
+      </div>
+
+<div class="form-field">
+  <label>Activity</label>
+  <select name="activity_name" id="bookingActivitySelect" required>
+    <option value="">Select Activity</option>
+  </select>
+</div>
+
+      <div class="form-field">
+        <label>Date</label>
+        <input type="date" name="activity_date" required>
+      </div>
+
+      <div class="form-field">
+        <label>Time</label>
+        <input type="time" name="activity_time" required>
+      </div>
+
+      <div class="form-field">
+        <label>Participants</label>
+        <input type="number" name="participants" required>
+      </div>
+
+<div class="form-field">
+  <label>Payment Reference</label>
+  <input type="text" name="payment_reference"  required>
+</div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" id="cancelBookActivity">Cancel</button>
+        <button type="submit" class="save-btn">Book Activity</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      // Buang session / token (jika ada)
+      localStorage.removeItem("admin_logged_in");
+
+      // Redirect ke login page
+      window.location.href = "loginadmin.html";
+    });
+  }
+});
+</script>
+
+
+<script>
+/* ===============================
+   PROFILE PICTURE UPLOAD
+   (TAMBAHAN SAHAJA – SAMA MACAM EXTRA ACTIVITIES)
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("profilePictureContainer");
+  const fileInput = document.getElementById("profilePictureInput");
+  const profilePic = document.getElementById("profilePicture");
+
+  if (!container || !fileInput || !profilePic) return;
+
+  // Klik gambar → buka file chooser
+  container.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  // Pilih gambar → preview + simpan
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePic.style.backgroundImage = `url(${reader.result})`;
+      localStorage.setItem("adminProfilePic", reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Load gambar bila refresh / page lain
+  const savedPic = localStorage.getItem("adminProfilePic");
+  if (savedPic) {
+    profilePic.style.backgroundImage = `url(${savedPic})`;
+  }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="../adminjavascript/extraactivitiesadmin.js"></script>
+</body>
+</html>
+

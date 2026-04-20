@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About | UPSI Glamping Parkk</title>
+  <link rel="stylesheet" href="../css/glamping.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ABOUT HERO -->
+<div class="hero-about">
+  <h1>ABOUT UPSI Glamping Park</h1>
+</div>
+
+<!-- ABOUT CONTENT -->
+<div class="section about-animate">
+  <img src="../imej/glampingAbout.jpeg" alt="Glamping Scene">
+
+  <div class="text">
+    <h2>We Have the Best Glamping Experience</h2>
+    <p>
+      Nestled in the heart of tranquil nature, UPSI Glamping Park offers a holiday experience that blends modern comfort with the captivating beauty of the outdoors. Surrounded by lush greenery and fresh air, UPSI Glamping Park is designed for visitors seeking a peaceful escape from daily routines — whether for relaxation or adventure.
+      <br><br>
+      At UPSI Glamping Park, we provide several cozy and family-friendly accommodation options. Each glamping unit is equipped with comfortable beds, proper ventilation, and essential amenities to ensure maximum comfort throughout your stay.
+      <br><br>
+      A variety of exciting activities awaits you during the day, including kayaking, stand-up paddle (SUP), and all-terrain vehicle (ATV) rides — perfect for creating fun and memorable moments with friends and family.
+      <br><br>
+      Our commitment is to provide a unique, comfortable, and enjoyable stay — ideal for couples, families, and groups looking to create unforgettable memories.
+    </p>
+
+    <a href="package.php" class="explore-btn">Explore Now</a>
+  </div>
+</div>
+
+<script>
+/* About scroll animation */
+const aboutEls = document.querySelectorAll('.about-animate');
+
+const aboutObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.3 });
+
+aboutEls.forEach(el => aboutObserver.observe(el));
+</script>
+
+
+</body>
+</html>

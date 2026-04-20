@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Forgot Password — UPSI Glamping</title>
+
+  <link rel="stylesheet" href="../css/login.css">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== POPUP (SUCCESS ONLY) ===== -->
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box">
+    <p id="popupMessage"></p>
+    <button id="popupBtn">OK</button>
+  </div>
+</div>
+
+<!-- ===== VIDEO BG ===== -->
+<div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="../imej/bookingVid.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+<!-- ===== LOGO ===== -->
+<div class="floating-bar">
+  <div class="brand-left">
+    <img src="../imej/logo1.png" alt="UPSI Glamping Logo">
+    <div class="brand-text">
+      <div class="brand-title">UPSI</div>
+      <div class="brand-sub">GLAMPING PARK</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <main class="card forgot-card">
+    <form id="forgotForm" novalidate>
+
+      <h1>Reset Password</h1>
+      <p class="hint">Enter your registered email and set a new password.</p>
+
+      <!-- EMAIL -->
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="you@example.com">
+        <div class="error-text" id="emailError"></div>
+      </div>
+
+      <!-- NEW PASSWORD -->
+      <div class="field">
+        <label>New Password</label>
+        <input type="password" id="newPassword" placeholder="Minimum 8 characters">
+        <div class="error-text" id="passwordError"></div>
+      </div>
+
+      <!-- CONFIRM -->
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password">
+        <div class="error-text" id="confirmError"></div>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="action-row">
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+        <a href="login.html" class="btn btn-ghost">Back to Login</a>
+      </div>
+
+    </form>
+  </main>
+</div>
+
+<script src="../javascript/forgot.js"></script>
+
+</body>
+</html>
